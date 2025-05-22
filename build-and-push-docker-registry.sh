@@ -16,7 +16,7 @@ DOCKER_IMG_TAG="latest"
 echo ""
 echo "Docker image build and push registry ..."
 echo ""
-
+echo date
 
 export DOCKER_IMG_TAG=$DOCKER_IMG_TAG
 
