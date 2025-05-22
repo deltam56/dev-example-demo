@@ -66,8 +66,7 @@ spec:
         stage('Deploy') {
             steps {
                 container('buildmain'){
-
-                    sh "sshpass  -f /etc/.sshpw ssh -o StrictHostKeyChecking=no root@10.10.120.2 service jobmanager start"
+					echo "#########It is Deploy! #############"
                 }
             }
         }
