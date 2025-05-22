@@ -7,29 +7,20 @@ kind: Pod
 spec:
   volumes:
     - name: docker-socket
-      emptyDir: {}
+      hostPath:
+        path: /var/run/docker.sock
     - name: workdir
       emptyDir: {}
   containers:
-    - name: docker-daemon
-      image: docker:19.03.1-dind
-      securityContext:
-        privileged: true
-      volumeMounts:
-        - name: docker-socket
-          mountPath: /var/run
     - name: buildmain
-      image: ubuntu:latest
-      readinessProbe:
-        exec:
-          command: [sh, -c, "ls -S /var/run/docker.sock"]
+      image: docker:24.0.7-cli
       command: ["sleep"]
       args: ["99d"]
       volumeMounts:
         - name: workdir
           mountPath: /work
         - name: docker-socket
-          mountPath: /var/run
+          mountPath: /var/run/docker.sock
 '''
             defaultContainer 'buildmain'
         }
