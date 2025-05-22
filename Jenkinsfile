@@ -46,7 +46,7 @@ spec:
             steps {
                 container('buildmain') {
                     echo "#########It is build main##########"
-                    sh './build-and-push-docker-regitry.sh'
+                    sh './build-and-push-docker-registry.sh'
                 }
             }
         }
