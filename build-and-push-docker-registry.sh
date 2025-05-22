@@ -17,8 +17,6 @@ echo ""
 echo "Docker image build and push registry ..."
 echo ""
 
-echo "insert image version"
-read DOCKER_IMG_TAG
 
 export DOCKER_IMG_TAG=$DOCKER_IMG_TAG
 
