@@ -10,8 +10,6 @@ spec:
       emptyDir: {}
     - name: workdir
       emptyDir: {}
-  imagePullSecrets:
-    - name: insilico-docker-registry
   containers:
     - name: docker-daemon
       image: docker:19.03.1-dind
@@ -21,7 +19,7 @@ spec:
         - name: docker-socket
           mountPath: /var/run
     - name: buildmain
-      image: dev-docker.seegene.com/services/jobmanager-build-base:latest
+      image: ubuntu:latest
       readinessProbe:
         exec:
           command: [sh, -c, "ls -S /var/run/docker.sock"]
