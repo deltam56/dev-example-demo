@@ -27,18 +27,26 @@ spec:
     }
 
     stages {
-        stage('Install dependencies') {
-            steps {
-                container('buildmain') {
-                    sh './build-and-push-docker-regitry.sh'
-                }
-            }
-        }
-
+		stage('Install dependencies') {
+		    steps {
+		        container('buildmain') {
+		            sh '''
+		                addgroup -S docker || true
+		                adduser -S jenkins || true
+		                adduser jenkins docker || true
+		                echo "[INFO] Users in docker group:"
+		                getent group docker
+		                echo "[INFO] Testing docker access:"
+		                docker version
+		            '''
+		        }
+		    }
+		}
         stage('Build') {
             steps {
                 container('buildmain') {
                     echo "#########It is build main##########"
+                    sh './build-and-push-docker-regitry.sh'
                 }
             }
         }
